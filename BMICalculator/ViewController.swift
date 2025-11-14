@@ -11,7 +11,18 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        /*
+         BMI = W/(h*h)
+         */
+        
+        let label1 = UILabel()
+        let label2 = UILabel()
+        
+        label1.text = "Enter your weight"
+        label2.text = "Enter your height"
+        
+        view.addSubview(label1)
+        view.addSubview(label2)
     }
 
 
