@@ -30,17 +30,17 @@ class ViewController: UIViewController {
         /*
          BMI = W/(h*h)
          */
-        weightL.text = "Enter your weight"
+        weightL.text = "Weight (kg)"
         weightL.font = .systemFont(ofSize: 18)
-        heightL.text = "Enter your height"
+        heightL.text = "Height (cm)"
         heightL.font = .systemFont(ofSize: 18)
         
-        weightTF.placeholder = "Weight"
+        weightTF.placeholder = "Enter weight"
         weightTF.textColor = .darkText
         weightTF.borderStyle = .roundedRect
         weightTF.keyboardType = .decimalPad
         
-        heightTF.placeholder = "Height"
+        heightTF.placeholder = "Enter height"
         heightTF.textColor = .darkText
         heightTF.borderStyle = .roundedRect
         heightTF.keyboardType = .decimalPad
@@ -74,9 +74,9 @@ class ViewController: UIViewController {
          myButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
          */
         
-        myButton.setTitle("Calculate", for: .normal)
+        myButton.setTitle("Calculate BMI", for: .normal)
         myButton.setTitleColor(.white, for: .normal)
-        myButton.backgroundColor = .blue
+        myButton.backgroundColor = .systemBlue
         myButton.layer.cornerRadius = 10
         myButton.layer.borderWidth = 2
         myButton.layer.borderColor = UIColor.white.cgColor
@@ -100,16 +100,16 @@ class ViewController: UIViewController {
             weightL.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             weightL.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            weightTF.topAnchor.constraint(equalTo: weightL.topAnchor, constant: 50),
+            weightTF.topAnchor.constraint(equalTo: weightL.topAnchor, constant: 40),
             weightTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             weightTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             
-            heightL.topAnchor.constraint(equalTo: weightTF.topAnchor, constant: 100),
+            heightL.topAnchor.constraint(equalTo: weightTF.topAnchor, constant: 60),
             heightL.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             heightL.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            heightTF.topAnchor.constraint(equalTo: heightL.topAnchor, constant: 50),
+            heightTF.topAnchor.constraint(equalTo: heightL.topAnchor, constant: 40),
             heightTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             heightTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
@@ -173,15 +173,19 @@ class ViewController: UIViewController {
             return
         }
         
-        let BMI = wVal/(hVal*hVal)
+        let h_cm = hVal/100
+        
+        let BMI = wVal/(h_cm*h_cm)
+        let formattedBMI = String(format: "%.1f", BMI)
+        
         print("BMI: \(BMI)")
         
-        result.text = "Your BMI is \(BMI)"
+        result.text = "Your BMI: \(formattedBMI)"
     }
 
 }
 
-//#Preview {
-//    ViewController()
-//}
+#Preview {
+    ViewController()
+}
 
