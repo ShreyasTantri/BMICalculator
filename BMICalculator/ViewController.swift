@@ -8,16 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    /*
-     You used this before:
-     var weight: Float
-     var height: Float
-     
-     “You declared stored properties… but you never gave them initial values.”
-     Unlike C/Java, Swift does NOT allow uninitialized stored variables in a class.
-     So even before your buttonTapped runs, the compiler stops you.
-     */
-    
     let weightL = UILabel()
     let heightL = UILabel()
     let weightTF = UITextField()
@@ -27,9 +17,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-         BMI = W/(h*h)
-         */
         weightL.text = "Weight (kg)"
         weightL.font = .systemFont(ofSize: 18)
         heightL.text = "Height (cm)"
@@ -49,30 +36,6 @@ class ViewController: UIViewController {
         result.font = .systemFont(ofSize: 20, weight: .bold)
         result.textColor = .blue
         result.textAlignment = .center
-        
-        /*
-         Example:
-         
-         myButton.setTitle("Tap Me", for: .normal)
-         myButton.setTitleColor(.white, for: .normal) // Set title color
-         
-         myButton.backgroundColor = .blue
-         
-         myButton.layer.cornerRadius = 10 // Rounded corners
-         myButton.layer.borderWidth = 2 // Border thickness
-         myButton.layer.borderColor = UIColor.white.cgColor // Border color
-         
-         myButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-         
-         Equivalent to IBActions:
-         
-         @objc buttonTapped(_ sender: UIButton) {
-             print("Button was tapped!")
-             // Handle the event here
-         }
-
-         myButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-         */
         
         myButton.setTitle("Calculate BMI", for: .normal)
         myButton.setTitleColor(.white, for: .normal)
@@ -123,69 +86,35 @@ class ViewController: UIViewController {
         ]
         )
         
-        
-        /*
-         Adding constraints programmatically in Swift UIKit is achieved primarily using NSLayoutConstraint and NSLayoutAnchor.
-         
-         Before adding constraints, ensure the view's translatesAutoresizingMaskIntoConstraints property is set to false. This disables the automatic translation of autoresizing masks into constraints, preventing conflicts with your programmatic constraints.
-         */
-        
         myButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
     }
 
     @objc func buttonTapped(_ sender: UIButton) {
-        // convert weight and height which are in String to double here
-//        let w = Double(weightTF.text!)!
-//        let h = Double(heightTF.text!)!
-        
-        /*
-         Force unwrap style
-         guard let w = Double(weightTF.text!) else {
-             print("Invalid input")
-             return
-         }
-         guard let h = Double(heightTF.text!) else {
-             print("Invalid input")
-             return
-         }
-         var BMI = w/(h*h)
-         */
-        
-        
-        // Note: if input is "abc" or "" or " " or "." it returns nil.
-        
-        //Guard style
-        guard let w = weightTF.text else {
+        guard let weight = weightTF.text else {
             print("Invalid input")
             return
         }
-        guard let h = heightTF.text else {
+        guard let height = heightTF.text else {
+            print("Invalid input")
+            return
+        }
+        guard let weightValue = Double(weight) else {
+            print("Invalid input")
+            return
+        }
+        guard let heightValue = Double(height) else {
             print("Invalid input")
             return
         }
         
-        guard let wVal = Double(w) else {
-            print("Invalid input")
-            return
-        }
-        guard let hVal = Double(h) else {
-            print("Invalid input")
-            return
-        }
+        let finalHeight = heightValue/100
         
-        let h_cm = hVal/100
-        
-        let BMI = wVal/(h_cm*h_cm)
+        let BMI = weightValue/(finalHeight*finalHeight)
         let formattedBMI = String(format: "%.1f", BMI)
         
-        print("BMI: \(BMI)")
-        
+        print("BMI: \(formattedBMI)")        
         result.text = "Your BMI: \(formattedBMI)"
     }
 
-}
-
-#Preview {
-    ViewController()
 }
 
