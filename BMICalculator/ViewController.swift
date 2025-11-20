@@ -107,6 +107,20 @@ class ViewController: UIViewController {
             return
         }
         
+        /*
+        let email: String? = ""
+        
+        if let email = email {
+            print(email)
+        }
+        
+        guard let email = email else {
+            return
+        }
+        
+        print(email)
+       */
+        
         let finalHeight = heightValue/100
         
         let BMI = weightValue/(finalHeight*finalHeight)
